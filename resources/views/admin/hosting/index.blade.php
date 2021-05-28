@@ -1,4 +1,4 @@
-@extends('layouts.panel',['pageName' => 'Models'])
+@extends('layouts.panel',['pageName' => 'Hosting'])
 
 @section('extrastyles')
     <link href="/admin/assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -40,13 +40,12 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{route('panel.news.ajaxget')}}",
+                    url: "{{route('panel.hosting.ajaxget')}}",
                     type: "POST"
                 },
                 columns: [
                     { data: 'sort' },
-                    { data: 'title' },
-                    { data: 'created_at' },
+                    { data: 'name' },
                     { data: 'status' },
                     { data: 'actions' },
                 ]
@@ -65,7 +64,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div>
-                                    <h4 class="header-title mb-3">{{$title}} <a href='{{ route('panel.news.create') }}' type="button" class="btn btn-success new_button" >Yeni Bülten</a></h4>
+                                    <h4 class="header-title mb-3">{{$title}} <a href='{{ route('panel.hosting.create') }}' type="button" class="btn btn-success new_button" >New Host</a></h4>
                                 </div>
                             </div>
                         </div>
@@ -78,11 +77,10 @@
                                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Sıra</th>
-                                                <th>Başlık</th>
-                                                <th>Oluşturulma Tarihi</th>
-                                                <th>Durum</th>
-                                                <th>Aksiyonlar</th>
+                                                <th>Sort</th>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                     </table>

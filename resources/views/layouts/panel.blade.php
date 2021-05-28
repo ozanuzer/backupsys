@@ -5,17 +5,23 @@
         <meta charset="utf-8" />
         <title>Panel | Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Responsive bootstrap 4 admin template" name="description" />
-        <meta content="Coderthemes" name="author" />
+        <meta content="Backup System Software" name="description" />
+        <meta content="OzanUzer" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
         <!-- third party css -->
         @yield('extrastyles')
         <!-- App css -->
-        <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-        <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+        <?php if(date('H')>19 || date('H')<06 ){ ?>
+            <link href="/admin/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+            <link href="/admin/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+        <?php } else { ?>
+            <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
+            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+            <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+        <?php } ?>
 
         <style>
             .new_button{
@@ -58,23 +64,23 @@
                 <div class="logo-box">
                     <a href="{{ route('dashboard') }}" class="logo text-center logo-dark">
                         <span class="logo-lg">
-                            <img src="/assets/images/logo-dark.png" alt="" height="56">
+                            <img src="/logo.png" alt="" height="56">
                             <!-- <span class="logo-lg-text-dark">Simple</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-lg-text-dark">S</span> -->
-                            <img src="/assets/images/logo-dark.png" alt="" height="22">
+                            <img src="logo.png" alt="" height="22">
                         </span>
                     </a>
 
                     <a href="{{ route('dashboard') }}" class="logo text-center logo-light">
                         <span class="logo-lg">
-                            <img src="/assets/images/logo-light.png" alt="" height="56">
+                            <img src="/logo_dark.png" alt="" height="56">
                             <!-- <span class="logo-lg-text-light">Simple</span> -->
                         </span>
                         <span class="logo-sm">
                             <!-- <span class="logo-lg-text-light">S</span> -->
-                            <img src="/assets/images/logo-dark.png" alt="" height="22">
+                            <img src="/logo_dark.png" alt="" height="22">
                         </span>
                     </a>
                 </div>
@@ -112,7 +118,7 @@
                         </div>
                         <div class="user-info">
                             <a href="#">{{ Auth::user()->name }}</a>
-                            <p class="text-muted m-0">Yönetim Paneli</p>
+                            <p class="text-muted m-0">Admin Panel</p>
                         </div>
                     </div>
     
@@ -121,47 +127,26 @@
     
                 <ul class="metismenu" id="side-menu">
     
-                    <li class="menu-title">Menü</li>
+                    <li class="menu-title">Menu</li>
     
                     <li>
                         <a href="{{ route('dashboard') }}">
                             <i class="ti-home"></i>
-                            <span> Ana Sayfa </span>
+                            <span> Dashboard </span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);">
-                            <i class="mdi mdi-account-multiple-outline"></i>
-                            <span>  Modeller  </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="nav-second-level nav" aria-expanded="false">
-                            <li>
-                                <a href="{{ route('panel.models.women') }}" class >Kadın</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('panel.models.man') }}">Erkek</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('panel.models.intown') }}">Şehirdekiler</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('panel.models.timeless') }}">Timeless</a>
-                            </li>
-                        </ul>
                     </li>
     
                     <li>
-                        <a href="{{ route('panel.slider') }}">
+                        <a href="{{ route('panel.hosting') }}">
                             <i class="mdi mdi-message-image-outline"></i>
-                            <span> Slider </span>
+                            <span> Hosting </span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('panel.news') }}">
+                        <a href="{{ route('panel.hosting') }}">
                             <i class="mdi mdi-newspaper-variant-outline"></i>
-                            <span> Bülten </span>
+                            <span> Remote Settings </span>
                         </a>
                     </li>
     
@@ -185,7 +170,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    2020 &copy; <a href="https://puxo.com.tr/" target='_blank'>Puxo</a>
+                                    2021 &copy; <a href="https://fikirkasabasi.com/" target='_blank'>FikirKasabası</a>
                                 </div>
                             </div>
                         </div>

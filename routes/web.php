@@ -25,6 +25,31 @@ Route::group(['middleware' => 'admin'], function()
 {
     Route::prefix('panel')->group(function () {
         Route::get('/', 'Panel\DashboardController@index')->name('dashboard');
+
+        //HOSTING
+        Route::get('/hosting', 'Panel\HostingController@index')->name('panel.hosting');
+        Route::post('/hosting/ajaxget', 'Panel\HostingController@ajaxget')->name('panel.hosting.ajaxget');
+        Route::get('/hosting/create', 'Panel\HostingController@create')->name('panel.hosting.create');
+        Route::post('/hosting/store', 'Panel\HostingController@store')->name('panel.hosting.store');
+        Route::get('/hosting/edit/{id}', 'Panel\HostingController@edit')->name('panel.hosting.edit');
+        Route::post('/hosting/edit/{id}', 'Panel\HostingController@update')->name('panel.hosting.update');
+        Route::get('/hosting/delete/{id}', 'Panel\HostingController@delete')->name('panel.hosting.update');
+        Route::get('/hosting/up/{id}', 'Panel\HostingController@up')->name('panel.hosting.up');
+        Route::get('/hosting/down/{id}', 'Panel\HostingController@down')->name('panel.hosting.down');
+        Route::get('/hosting/active/{id}', 'Panel\HostingController@active')->name('panel.hosting.active');
+
+
+        //REMOTE SETTINGS
+        Route::get('/remotesettings', 'Panel\RemoteSettingsController@index')->name('panel.remotesettings');
+        Route::post('/remotesettings/ajaxget', 'Panel\RemoteSettingsController@ajaxget')->name('panel.remotesettings.ajaxget');
+        Route::get('/remotesettings/create', 'Panel\RemoteSettingsController@create')->name('panel.remotesettings.create');
+        Route::post('/remotesettings/store', 'Panel\RemoteSettingsController@store')->name('panel.remotesettings.store');
+        Route::get('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@edit')->name('panel.remotesettings.edit');
+        Route::post('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@update')->name('panel.remotesettings.update');
+        Route::get('/remotesettings/delete/{id}', 'Panel\RemoteSettingsController@delete')->name('panel.remotesettings.update');
+        Route::get('/remotesettings/up/{id}', 'Panel\RemoteSettingsController@up')->name('panel.remotesettings.up');
+        Route::get('/remotesettings/down/{id}', 'Panel\RemoteSettingsController@down')->name('panel.remotesettings.down');
+        Route::get('/remotesettings/active/{id}', 'Panel\RemoteSettingsController@active')->name('panel.remotesettings.active');
 /*
         //Models
         Route::get('/models/women', 'Panel\ModelsController@women')->name('panel.models.women');
