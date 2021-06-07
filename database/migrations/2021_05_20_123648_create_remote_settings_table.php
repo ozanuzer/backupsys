@@ -16,11 +16,12 @@ class CreateRemoteSettingsTable extends Migration
         Schema::create('remote_settings', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
+            $table->string('remoteip', 150);
             $table->string('remotelogin', 150);
             $table->string('remotepass', 150);
             $table->text('remotepath');
-            $table->string('remoteprt', 10);
-            $table->tinyInteger('remotetype');
+            $table->string('remoteport', 10);
+            $table->string('remotetype', 15);
             $table->timestamps();
         });
     }

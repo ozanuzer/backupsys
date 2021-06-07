@@ -53,7 +53,7 @@
                         
                         <div class="form-group text-right mb-0">
                             <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                Gönder
+                                Send
                             </button>
                         </div>
                     </form>

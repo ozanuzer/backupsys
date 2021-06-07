@@ -144,7 +144,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('panel.hosting') }}">
+                        <a href="{{ route('panel.remotesettings') }}">
                             <i class="mdi mdi-newspaper-variant-outline"></i>
                             <span> Remote Settings </span>
                         </a>
@@ -231,6 +231,21 @@
         @yield('extrascripts')
         <!-- App js -->
         <script src="/admin/assets/js/app.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                const newColorScheme = e.matches ? "dark" : "light";
+                if (newColorScheme === "dark"){
+                    $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap-dark.min.css");
+                    $('#app-stylesheet').attr('href', "/admin/assets/css/app-dark.min.css");
+                } else {
+                    $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap.min.css");
+                    $('#app-stylesheet').attr('href', "/admin/assets/css/app.min.css");
+                }
+                
+            });
+        });
+        </script>
         
 
     </body>

@@ -5,14 +5,29 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Hosting;
+use App\Models\DatabaseUsers;
+use App\Models\Log;
+use App\Models\RemoteSettings;
+use App\Models\Schedule;
 
-class HostingController extends Controller
+class BackupController extends Controller
 {
-    public function index(){   
+    public function index($id){
+        $hosting = Hosting::Find($id);
+        $databases = DatabaseUsers::where('hid', $id)->get();
+        $logs = Log::where('hid', $id)->get();
+        $remotesettings = RemoteSettings::all();
+        $schedule = Schedule::where('hid', $id)->get();
+        
         $data = array(
-            'title' => 'Hostings',
+            'title' => 'Backups',
+            'hosting' => $hosting,
+            'logs' => $logs,
+            'remotesettings' => $remotesettings,
+            'schedule' => $schedule,
+            'databases' => $databases
         );
-        return view('admin.hosting.index')->with($data);
+        return view('admin.backups.index')->with($data);
     }
 
     public function ajaxget(Request $request){
@@ -57,7 +72,7 @@ class HostingController extends Controller
             "status" => $statusHtml,
             "actions" => '<div class="btn-group">
                             <a href="'.route('panel.hosting.edit', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Edit</a>
-                            <a href="'.route('panel.backups', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Backups</a>
+                            <a href="'.route('panel.hosting.update', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Backups</a>
                             <a href="'.route('panel.hosting.delete', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button" onclick="return confirm(\'Do you confirm delete?\');" >Delete</a>
                         </div>',
             "id" => $record->id

@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Hosting;
+use App\Models\RemoteSettings;
 
-class HostingController extends Controller
+class RemoteSettingsController extends Controller
 {
     public function index(){   
         $data = array(
-            'title' => 'Hostings',
+            'title' => 'Remote Settings',
         );
-        return view('admin.hosting.index')->with($data);
+        return view('admin.remotesettings.index')->with($data);
     }
 
     public function ajaxget(Request $request){
@@ -32,14 +32,14 @@ class HostingController extends Controller
      $searchValue = $search_arr['value']; // Search value
 
      // Total records
-     $totalRecords = Hosting::select('count(*) as allcount')->count();
-     $totalRecordswithFilter = Hosting::select('count(*) as allcount')->where('name', 'like', '%' .$searchValue . '%')->count();
+     $totalRecords = RemoteSettings::select('count(*) as allcount')->count();
+     $totalRecordswithFilter = RemoteSettings::select('count(*) as allcount')->where('name', 'like', '%' .$searchValue . '%')->count();
 
      // Fetch records
-     //$records = Hosting::orderBy($columnName,$columnSortOrder)
-     $records = Hosting::orderBy('id',$columnSortOrder)
-       ->where('hosting.name', 'like', '%' .$searchValue . '%')
-       ->select('hosting.*')
+     //$records = RemoteSettings::orderBy($columnName,$columnSortOrder)
+     $records = RemoteSettings::orderBy('id',$columnSortOrder)
+       ->where('remote_settings.name', 'like', '%' .$searchValue . '%')
+       ->select('remote_settings.*')
        ->skip($start)
        ->take($rowperpage)
        ->get();
@@ -47,17 +47,13 @@ class HostingController extends Controller
      $data_arr = array();
      
      foreach($records as $record){
-        if ($record->status == 1)
-            $statusHtml = '<a href="/panel/hosting/active/'.$record->id.'" class="btn btn-icon btn-success dbtalbe_button"> <i class="mdi mdi-check-bold"></i> </a>';
-        else
-            $statusHtml = '<a href="/panel/hosting/active/'.$record->id.'" class="btn btn-icon btn-dark dbtalbe_button"> <i class="mdi mdi-check-bold"></i> </a>';
         $data_arr[] = array(
             "sort" => $record->id,
             "name" => $record->name,
-            "status" => $statusHtml,
+            "remotetype" => $record->remotetype,
             "actions" => '<div class="btn-group">
-                            <a href="'.route('panel.hosting.edit', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Edit</a>
-                            <a href="'.route('panel.hosting.update', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Delete</a>
+                            <a href="'.route('panel.remotesettings.edit', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button">Edit</a>
+                            <a href="'.route('panel.remotesettings.delete', $record->id).'" type="button" class="btn btn-secondary dbtalbe_button" onclick="return confirm(\'Do you confirm delete?\');" >Delete</a>
                         </div>',
             "id" => $record->id
         );
@@ -75,86 +71,95 @@ class HostingController extends Controller
     }
 
     public function create(){
-        return view('admin.hosting.forms');
+        return view('admin.remotesettings.forms');
     }
 
     public function store(Request $request){
         $req = $request->all();
-        $hosting = new Hosting; 
+        $savedb = new RemoteSettings; 
         //print_r($models);
         //echo $req['name'];
-        $hosting->name = $req['name'];
-        $hosting->path = $req['path'];
-        $hosting->dbpath = $req['dbpath'];
-        $hosting->status = 1;
-        $hosting->save();
-        $new = Hosting::Find($hosting->id);
-        return view('admin.hosting.forms')->with('hosting', $hosting);
+        $savedb->name = $req['name'];
+        $savedb->remoteip = $req['remoteip'];
+        $savedb->remotelogin = $req['remotelogin'];
+        $savedb->remotepass = $req['remotepassword'];
+        $savedb->remoteport = $req['remoteport'];
+        $savedb->remotepath = $req['remotepath'];
+        $savedb->remotetype = $req['remotetype'];
+        $savedb->save();
+        $new = RemoteSettings::Find($savedb->id);
+        return view('admin.remotesettings.forms')->with('savedb', $savedb);
         //return redirect()->route('panel.hosting');
     }
 
     public function edit($id){
-        $hosting = Hosting::Find($id);
-        return view('admin.hosting.forms')->with('hosting', $hosting);
+        $savedb = RemoteSettings::Find($id);
+        return view('admin.remotesettings.forms')->with('savedb', $savedb);
     }
 
     public function update($id, Request $request){
         $req = $request->all();
-        $hosting = Hosting::Find($id);
+        $savedb = RemoteSettings::Find($id);
         //print_r($models);
         //echo $req['name'];
-        $hosting->name = $req['name'];
-        $hosting->update();
+        $savedb->name = $req['name'];
+        $savedb->remoteip = $req['remoteip'];
+        $savedb->remotelogin = $req['remotelogin'];
+        $savedb->remotepass = $req['remotepassword'];
+        $savedb->remoteport = $req['remoteport'];
+        $savedb->remotepath = $req['remotepath'];
+        $savedb->remotetype = $req['remotetype'];
+        $savedb->update();
         return back()->withInput();
     }
 
     public function delete($id){
-        $hosting = Hosting::Find($id);
-        $hosting->delete();
+        $savedb = RemoteSettings::Find($id);
+        $savedb->delete();
         return back()->withInput();
         //return redirect()->route('models.poloraid', $id);
     }
 
     public function up($id){
-        $hosting = Hosting::Find($id);
-        if ($hosting->sort > 1){
-            $temp = Hosting::where('sort', ($hosting->sort-1))->first();
-            $temp->sort = $hosting->sort;
-            $hosting->sort = $hosting->sort - 1;
-            $hosting->update();
+        $savedb = RemoteSettings::Find($id);
+        if ($savedb->sort > 1){
+            $temp = RemoteSettings::where('sort', ($savedb->sort-1))->first();
+            $temp->sort = $savedb->sort;
+            $savedb->sort = $savedb->sort - 1;
+            $savedb->update();
             $temp->update();
         }
         return back()->withInput();
     }
 
     public function down($id){
-        $hosting = Hosting::Find($id);
+        $savedb = RemoteSettings::Find($id);
         $allmodel = count(hostingletter::get());
-        if ($hosting->sort < $allmodel){
-            $temp = Hosting::where('sort', ($hosting->sort+1))->first();
-            $temp->sort = $hosting->sort;
-            $hosting->sort = $hosting->sort + 1;
-            $hosting->update();
+        if ($savedb->sort < $allmodel){
+            $temp = RemoteSettings::where('sort', ($savedb->sort+1))->first();
+            $temp->sort = $savedb->sort;
+            $savedb->sort = $savedb->sort + 1;
+            $savedb->update();
             $temp->update();
         }
         return back()->withInput();
     }
 
     public function active($id){
-        $hosting = Hosting::Find($id);
+        $savedb = RemoteSettings::Find($id);
         //print_r($models);
         //echo $req['name'];
-        $hosting->status = ($hosting->status == 1) ? 0 : 1;
-        $hosting->update();
+        $savedb->status = ($savedb->status == 1) ? 0 : 1;
+        $savedb->update();
         return back()->withInput();
         //return redirect()->route('models.gallery', $id);
     }
 
     public function resort(){
-        $hosting = Hosting::orderBy('sort','ASC')->get();
+        $savedb = RemoteSettings::orderBy('sort','ASC')->get();
         $c = 1;
-        foreach ($hosting as $new) {
-            $modeltemp = Hosting::Find($new->id);
+        foreach ($savedb as $new) {
+            $modeltemp = RemoteSettings::Find($new->id);
             $modeltemp->sort = $c;
             $modeltemp->update();
             $c++;

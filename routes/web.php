@@ -33,7 +33,7 @@ Route::group(['middleware' => 'admin'], function()
         Route::post('/hosting/store', 'Panel\HostingController@store')->name('panel.hosting.store');
         Route::get('/hosting/edit/{id}', 'Panel\HostingController@edit')->name('panel.hosting.edit');
         Route::post('/hosting/edit/{id}', 'Panel\HostingController@update')->name('panel.hosting.update');
-        Route::get('/hosting/delete/{id}', 'Panel\HostingController@delete')->name('panel.hosting.update');
+        Route::get('/hosting/delete/{id}', 'Panel\HostingController@delete')->name('panel.hosting.delete');
         Route::get('/hosting/up/{id}', 'Panel\HostingController@up')->name('panel.hosting.up');
         Route::get('/hosting/down/{id}', 'Panel\HostingController@down')->name('panel.hosting.down');
         Route::get('/hosting/active/{id}', 'Panel\HostingController@active')->name('panel.hosting.active');
@@ -46,7 +46,20 @@ Route::group(['middleware' => 'admin'], function()
         Route::post('/remotesettings/store', 'Panel\RemoteSettingsController@store')->name('panel.remotesettings.store');
         Route::get('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@edit')->name('panel.remotesettings.edit');
         Route::post('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@update')->name('panel.remotesettings.update');
-        Route::get('/remotesettings/delete/{id}', 'Panel\RemoteSettingsController@delete')->name('panel.remotesettings.update');
+        Route::get('/remotesettings/delete/{id}', 'Panel\RemoteSettingsController@delete')->name('panel.remotesettings.delete');
+        Route::get('/remotesettings/up/{id}', 'Panel\RemoteSettingsController@up')->name('panel.remotesettings.up');
+        Route::get('/remotesettings/down/{id}', 'Panel\RemoteSettingsController@down')->name('panel.remotesettings.down');
+        Route::get('/remotesettings/active/{id}', 'Panel\RemoteSettingsController@active')->name('panel.remotesettings.active');
+
+
+        //BACKUPS SETTINGS
+        Route::get('/backups/{id}', 'Panel\BackupController@index')->name('panel.backups');
+        Route::post('/remotesettings/ajaxget', 'Panel\RemoteSettingsController@ajaxget')->name('panel.remotesettings.ajaxget');
+        Route::get('/remotesettings/create', 'Panel\RemoteSettingsController@create')->name('panel.remotesettings.create');
+        Route::post('/remotesettings/store', 'Panel\RemoteSettingsController@store')->name('panel.remotesettings.store');
+        Route::get('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@edit')->name('panel.remotesettings.edit');
+        Route::post('/remotesettings/edit/{id}', 'Panel\RemoteSettingsController@update')->name('panel.remotesettings.update');
+        Route::get('/remotesettings/delete/{id}', 'Panel\RemoteSettingsController@delete')->name('panel.remotesettings.delete');
         Route::get('/remotesettings/up/{id}', 'Panel\RemoteSettingsController@up')->name('panel.remotesettings.up');
         Route::get('/remotesettings/down/{id}', 'Panel\RemoteSettingsController@down')->name('panel.remotesettings.down');
         Route::get('/remotesettings/active/{id}', 'Panel\RemoteSettingsController@active')->name('panel.remotesettings.active');
