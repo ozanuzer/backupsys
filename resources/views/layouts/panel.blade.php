@@ -13,16 +13,17 @@
         <!-- third party css -->
         @yield('extrastyles')
         <!-- App css -->
-        <?php if(date('H')>19 || date('H')<06 ){ ?>
-            <link href="/admin/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-            <link href="/admin/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
-        <?php } else { ?>
-            <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet" />
-            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-            <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
-        <?php } ?>
-
+        <script>
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.write('<link href="/admin/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>');
+                document.write('<link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />');
+                document.write('<link href="/admin/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />');
+            } else {
+                document.write('<link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>');
+                document.write('<link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />');
+                document.write('<link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />');
+            }
+        </script>
         <style>
             .new_button{
                 float:right; margin-top:-10px; color:#fff !important;
@@ -241,9 +242,8 @@
                 } else {
                     $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap.min.css");
                     $('#app-stylesheet').attr('href', "/admin/assets/css/app.min.css");
-                }
-                
-            });
+                }                
+            });            
         });
         </script>
         
