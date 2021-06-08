@@ -30,6 +30,34 @@ class BackupController extends Controller
         return view('admin.backups.index')->with($data);
     }
 
+    public function storeDB($hid, Request $request){
+        $req = $request->all();
+        $savedb = new DatabaseUsers;
+        $savedb->hid = $hid;
+        $savedb->username = $req['dbusername'];
+        $savedb->password = $req['dbpass'];
+        $savedb->dbname = $req['dbname'];
+        $savedb->save();
+        $databases = DatabaseUsers::where('hid', $hid)->get();
+        return response()->json([
+            'success' => 'true',
+            'databases' => $databases
+        ]);
+    }
+
+    public function deleteDB($id, Request $request){
+        $savedb = DatabaseUsers::Find($id);
+        $savedb->delete();
+        $req = $request->all();
+        $databases = DatabaseUsers::where('hid', $req['hid'])->get();
+        return response()->json([
+            'success' => 'true',
+            'databases' => $databases
+        ]);
+        //return back()->withInput();
+        //return redirect()->route('models.poloraid', $id);
+    }
+
     public function ajaxget(Request $request){
         ## Read value
      $draw = $request->input('draw');

@@ -54,6 +54,8 @@ Route::group(['middleware' => 'admin'], function()
 
         //BACKUPS SETTINGS
         Route::get('/backups/{id}', 'Panel\BackupController@index')->name('panel.backups');
+        Route::post('/backups/storedb/{id}', 'Panel\BackupController@storeDB')->name('panel.backups.storedb');
+        Route::post('/backups/deletedb/{id}', 'Panel\BackupController@deleteDB')->name('panel.backups.deletedb');
         Route::post('/remotesettings/ajaxget', 'Panel\RemoteSettingsController@ajaxget')->name('panel.remotesettings.ajaxget');
         Route::get('/remotesettings/create', 'Panel\RemoteSettingsController@create')->name('panel.remotesettings.create');
         Route::post('/remotesettings/store', 'Panel\RemoteSettingsController@store')->name('panel.remotesettings.store');
