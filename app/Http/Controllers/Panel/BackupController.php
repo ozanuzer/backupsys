@@ -12,12 +12,23 @@ use App\Models\Schedule;
 
 class BackupController extends Controller
 {
+    public $periods = array(0 => 'Daily', 1 => 'Weekly', 2 => 'Monthly');
+    public $backupItems = array(0 => 'Files', 1 => 'Databases', 2 => 'Files And Databases');
     public function index($id){
         $hosting = Hosting::Find($id);
         $databases = DatabaseUsers::where('hid', $id)->get();
         $logs = Log::where('hid', $id)->get();
         $remotesettings = RemoteSettings::all();
         $schedule = Schedule::where('hid', $id)->get();
+
+        $i = 0;
+        foreach($schedule as $item){
+            $remote = RemoteSettings::Find($item->remoteId);
+            $schedule[$i]->remoteName = $remote->name;
+            $schedule[$i]->periodName = $this->periods[$item->period];
+            $schedule[$i]->backupItemsName = $this->backupItems[$item->backupItems];
+            $i++;
+        }
         
         $data = array(
             'title' => 'Backups',
@@ -53,6 +64,55 @@ class BackupController extends Controller
         return response()->json([
             'success' => 'true',
             'databases' => $databases
+        ]);
+        //return back()->withInput();
+        //return redirect()->route('models.poloraid', $id);
+    }
+
+    public function storeSCH($hid, Request $request){
+        $req = $request->all();
+        $savedb = new Schedule;
+        $savedb->hid = $hid;
+        $savedb->period = $req['period'];
+        $savedb->remoteId = $req['remoteid'];
+        if ($req['formfiles'] == true && $req['formdatabases'] == true)
+            $savedb->backupItems = 2;
+        else if ($req['formfiles'] == true)
+            $savedb->backupItems = 0;
+        if ($req['formdatabases'] == true)
+            $savedb->backupItems = 1;
+        $savedb->save();
+        $schedule = Schedule::where('hid', $hid)->get();
+        $i = 0;
+        foreach($schedule as $item){
+            $remote = RemoteSettings::Find($item->remoteId);
+            $schedule[$i]->remoteName = $remote->name;
+            $schedule[$i]->periodName = $this->periods[$item->period];
+            $schedule[$i]->backupItemsName = $this->backupItems[$item->backupItems];
+            $i++;
+        }
+        return response()->json([
+            'success' => 'true',
+            'schedule' => $schedule
+        ]);
+    }
+
+    public function deleteSCH($id, Request $request){
+        $savedb = Schedule::Find($id);
+        $savedb->delete();
+        $req = $request->all();
+        $schedule = Schedule::where('hid', $req['hid'])->get();
+        $i = 0;
+        foreach($schedule as $item){
+            $remote = RemoteSettings::Find($item->remoteId);
+            $schedule[$i]->remoteName = $remote->name;
+            $schedule[$i]->periodName = $this->periods[$item->period];
+            $schedule[$i]->backupItemsName = $this->backupItems[$item->backupItems];
+            $i++;
+        }
+        return response()->json([
+            'success' => 'true',
+            'schedule' => $schedule
         ]);
         //return back()->withInput();
         //return redirect()->route('models.poloraid', $id);

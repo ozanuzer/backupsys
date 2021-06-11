@@ -18,7 +18,7 @@ class CreateScheduleTable extends Migration
             $table->integer('hid');
             $table->tinyInteger('period'); //1=Haftalık 2=Aylık 3=Senelik
             $table->integer('remoteId');
-            $table->string('startTime', 255); //cronjob başlama bilgisi burada olacak.
+            //$table->string('startTime', 255); //cronjob başlama bilgisi burada olacak.
             $table->tinyInteger('backupItems'); //Files + Database. Serial şekilde tutulabilir
             $table->timestamps();
         });

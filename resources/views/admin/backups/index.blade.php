@@ -99,6 +99,94 @@
         }
     }
 
+
+    function saveSchedule(){
+        //console.log(document.getElementById('testmode').checked);
+        $.ajax({
+            url: "{{route('panel.backups.storesch', @$hosting->id)}}",
+            type: "POST",
+            data:  {period: $('#formperiod').val(), remoteid: $('#formremoteid').val(), formfiles: document.getElementById("formfiles").checked, formdatabases: document.getElementById("formdatabases").checked },
+            success: function (data, textStatus, jqXHR) {
+                if(data.success){
+                Swal.fire(
+                    'Success!',
+                    'Schedule Added!',
+                    'success'
+                    ).then(function (){
+                        //location.reload();
+                        $( "#scheduleTable" ).html(function() {
+                            var thtml = '';
+                            $.each(data.schedule, function(i, item) {
+                                thtml += '<tr>';
+                                thtml += '<th scope="row">'+data.schedule[i].id+'</th>';
+                                thtml += '<td>'+data.schedule[i].periodName+'</td>';
+                                thtml += '<td>'+data.schedule[i].remoteName+'</td>';
+                                thtml += '<td>'+data.schedule[i].backupItemsName+'</td>';
+                                thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteSchedule('+data.schedule[i].id+');" >Delete</a></td>';
+                                thtml += '</tr>';
+                            });
+                            return thtml;
+                        });
+                    });
+                }else{
+                    Swal.fire(
+                    'Error!',
+                    'System Error!',
+                    'error'
+                    ).then(function (){
+                        location.reload();
+                    });
+                }
+            },error: function(jqXHR, textStatus, errorThrown) {
+            }
+        });
+    }
+
+    function deleteSchedule(id){
+        //console.log(document.getElementById('testmode').checked);
+        var r = confirm('Do you confirm delete?');
+        if (r == true) {
+            $.ajax({
+                url: "/panel/backups/deletesch/"+id,
+                type: "POST",
+                data:  { hid: {{@$hosting->id}} },
+                success: function (data, textStatus, jqXHR) {
+                    if(data.success){
+                    Swal.fire(
+                        'Success!',
+                        'Schedule Deleted!',
+                        'success'
+                        ).then(function (){
+                            //location.reload();
+                            $( "#scheduleTable" ).html(function() {
+                                var thtml = '';
+                                $.each(data.schedule, function(i, item) {
+                                    thtml += '<tr>';
+                                    thtml += '<th scope="row">'+data.schedule[i].id+'</th>';
+                                    thtml += '<td>'+data.schedule[i].periodName+'</td>';
+                                    thtml += '<td>'+data.schedule[i].remoteName+'</td>';
+                                    thtml += '<td>'+data.schedule[i].backupItemsName+'</td>';
+                                    thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteSchedule('+data.schedule[i].id+');" >Delete</a></td>';
+                                    thtml += '</tr>';
+                                });
+                                return thtml;
+                            });
+                        });
+                    }else{
+                        Swal.fire(
+                        'Error!',
+                        'System Error!',
+                        'error'
+                        ).then(function (){
+                            location.reload();
+                        });
+                    }
+                },error: function(jqXHR, textStatus, errorThrown) {
+                }
+            });
+        }
+    }
+
 </script>
 @endsection
 
@@ -178,12 +266,92 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane show active" id="schedules">
-                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                                    <div class="table-responsive">
+                                            <table class="table table-striped m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Period</th>
+                                                        <th>Remote Name</th>
+                                                        <th>Items</th>
+                                                        <th>Process</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="scheduleTable">
+                                                @foreach ($schedule as $item)
+                                                    <tr>
+                                                        <th scope="row">{{ $item->id }}</th>
+                                                        <td>{{ $item->periodName }}</td>
+                                                        <td>{{ $item->remoteName }}</td>
+                                                        <td>{{ $item->backupItemsName }}</td>
+                                                        <td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteSchedule({{ $item->id }});" >Delete</a></td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="form-group row" style="margin-top:25px;">
+                                        <div class="col-md-6">
+                                            <select class="form-control" id="formperiod" >
+                                                <option selected="true" disabled="disabled">Period</option>
+                                                <option value="0">Daily</option>
+                                                <option value="1">Weekly</option>
+                                                <option value="2">Monthly</option>
+                                            </select>
+                                        </div>
+                                            <div class="col-md-6">
+                                            <select class="form-control" id="formremoteid" >
+                                                <option selected="true" disabled="disabled">Remote Settings</option>
+                                            @foreach ($remotesettings as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Backup Items</label>
+                                            <div class="col-md-6">
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="formfiles" type="checkbox" checked>
+                                                    <label for="formfiles">
+                                                        Files
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox checkbox-primary">
+                                                    <input id="formdatabases" type="checkbox" checked>
+                                                    <label for="formdatabases">
+                                                        Databases
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 form-group text-right mb-0">
+                                                <button class="btn btn-primary waves-effect waves-light mr-1" type="submit" onclick="saveSchedule()">
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane" id="logs">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-                                        <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                    <div class="table-responsive">
+                                            <table class="table table-striped m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Backup Date</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="logsTable">
+                                                @foreach ($logs as $log)
+                                                    <tr>
+                                                        <th scope="row">{{ $log->id }}</th>
+                                                        <td>{{ $log->backupDate }}</td>
+                                                        <td>{{ $log->status }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

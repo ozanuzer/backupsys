@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Hosting;
+use App\Models\Schedule;
+use App\Models\DatabaseUsers;
 
 class HostingController extends Controller
 {
@@ -112,6 +114,10 @@ class HostingController extends Controller
     public function delete($id){
         $hosting = Hosting::Find($id);
         $hosting->delete();
+        $sch = Schedule::where('hid', $id)->first();
+        $sch->delete();
+        $dbu = DatabaseUsers::where('hid', $id)->first();
+        $dbu->delete();
         return back()->withInput();
         //return redirect()->route('models.poloraid', $id);
     }
