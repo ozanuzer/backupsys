@@ -17,6 +17,7 @@ class CreateQueueTable extends Migration
             $table->id();
             $table->tinyInteger('locked');
             $table->integer('hid');
+            $table->string('hostingname', 150);
             $table->integer('schid');
             $table->tinyInteger('backupItems');
             $table->string('remoteip', 150);

@@ -65,6 +65,7 @@ class AddQueueCron extends Command
                 $savedb = new Queue;
                 $savedb->locked = 0;
                 $savedb->hid = $item->hid;
+                $savedb->hostingname = $hotsing->name;
                 $savedb->schid = $item->id;
                 $savedb->backupItems = $item->backupItems;
                 $savedb->remoteip = $remote->remoteip;
