@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Hosting;
 use App\Models\Schedule;
 use App\Models\DatabaseUsers;
+use App\Models\Log;
 
 class HostingController extends Controller
 {
@@ -120,6 +121,8 @@ class HostingController extends Controller
         $sch->delete();
         $dbu = DatabaseUsers::where('hid', $id)->first();
         $dbu->delete();
+        $log = Log::where('hid', $id)->first();
+        $log->delete();
         return back()->withInput();
         //return redirect()->route('models.poloraid', $id);
     }
