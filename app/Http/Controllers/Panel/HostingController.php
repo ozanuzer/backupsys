@@ -107,6 +107,8 @@ class HostingController extends Controller
         //print_r($models);
         //echo $req['name'];
         $hosting->name = $req['name'];
+        $hosting->path = $req['path'];
+        $hosting->dbpath = $req['dbpath'];
         $hosting->update();
         return back()->withInput();
     }
