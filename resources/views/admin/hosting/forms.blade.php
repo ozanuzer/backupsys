@@ -18,6 +18,13 @@
                 <div class="col-12">
                     <div>
                         <h4 class="header-title mb-3">New Hosting</h4>
+                        @if (empty($hosting))
+                        
+                        @else
+                        <div class="btn-group">
+                            <a href=' {{ route('panel.backups', $hosting->id) }} ' type="button" class="btn btn-secondary dbtalbe_button">Backups</a>
+                        </div>
+                        @endif
                         
                     </div>
                 </div>
