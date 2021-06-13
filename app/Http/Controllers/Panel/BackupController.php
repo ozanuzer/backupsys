@@ -75,11 +75,11 @@ class BackupController extends Controller
         $savedb->hid = $hid;
         $savedb->period = $req['period'];
         $savedb->remoteId = $req['remoteid'];
-        if ($req['formfiles'] == true && $req['formdatabases'] == true)
+        if ($req['formfiles'] == 'true' && $req['formdatabases'] == 'true')
             $savedb->backupItems = 2;
-        else if ($req['formfiles'] == true)
+        else if ($req['formfiles'] == 'true')
             $savedb->backupItems = 0;
-        else if ($req['formdatabases'] == true)
+        else if ($req['formdatabases'] == 'true')
             $savedb->backupItems = 1;
         $savedb->save();
         $schedule = Schedule::where('hid', $hid)->get();
