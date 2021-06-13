@@ -31,8 +31,8 @@
                             $.each(data.databases, function(i, item) {
                                 thtml += '<tr>';
                                 thtml += '<th scope="row">'+data.databases[i].id+'</th>';
-                                thtml += '<td>'+data.databases[i].username+'</td>';
-                                thtml += '<td>'+data.databases[i].password+'</td>';
+                                /*thtml += '<td>'+data.databases[i].username+'</td>';
+                                thtml += '<td>'+data.databases[i].password+'</td>';*/
                                 thtml += '<td>'+data.databases[i].dbname+'</td>';
                                 thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase('+data.databases[i].id+');" >Delete</a></td>';
                                 thtml += '</tr>';
@@ -75,8 +75,8 @@
                                 $.each(data.databases, function(i, item) {
                                     thtml += '<tr>';
                                     thtml += '<th scope="row">'+data.databases[i].id+'</th>';
-                                    thtml += '<td>'+data.databases[i].username+'</td>';
-                                    thtml += '<td>'+data.databases[i].password+'</td>';
+                                    /*thtml += '<td>'+data.databases[i].username+'</td>';
+                                    thtml += '<td>'+data.databases[i].password+'</td>';*/
                                     thtml += '<td>'+data.databases[i].dbname+'</td>';
                                     thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase('+data.databases[i].id+');" >Delete</a></td>';
                                     thtml += '</tr>';
@@ -227,8 +227,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Username</th>
-                                                        <th>Password</th>
+                                                        <!--<th>Username</th>
+                                                        <th>Password</th>-->
                                                         <th>DB Name</th>
                                                         <th>Process</th>
                                                     </tr>
@@ -237,8 +237,8 @@
                                                 @foreach ($databases as $db)
                                                     <tr>
                                                         <th scope="row">{{ $db->id }}</th>
-                                                        <td>{{ $db->username }}</td>
-                                                        <td>{{ $db->password }}</td>
+                                                        <!--<td>{{ $db->username }}</td>
+                                                        <td>{{ $db->password }}</td>-->
                                                         <td>{{ $db->dbname }}</td>
                                                         <td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase({{ $db->id }});" >Delete</a></td>
                                                     </tr>
@@ -247,12 +247,12 @@
                                             </table>
                                         </div>
                                         <div class="form-group row" style="margin-top:25px;">
-                                            <div class="col-md-6">
+                                            <!--<div class="col-md-6">
                                                 <input id="dbusername" type="text" class="form-control" placeholder="Username..." value="">
                                             </div>
                                             <div class="col-md-6">
                                                 <input id="dbpass" type="text" class="form-control" placeholder="Password..." value="">
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6">
