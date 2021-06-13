@@ -84,7 +84,6 @@ class RemoteSettingsController extends Controller
         $savedb->remotelogin = $req['remotelogin'];
         $savedb->remotepass = $req['remotepassword'];
         $savedb->remoteport = $req['remoteport'];
-        $savedb->remotepath = $req['remotepath'];
         $savedb->remotetype = $req['remotetype'];
         $savedb->save();
         $new = RemoteSettings::Find($savedb->id);
@@ -107,7 +106,6 @@ class RemoteSettingsController extends Controller
         $savedb->remotelogin = $req['remotelogin'];
         $savedb->remotepass = $req['remotepassword'];
         $savedb->remoteport = $req['remoteport'];
-        $savedb->remotepath = $req['remotepath'];
         $savedb->remotetype = $req['remotetype'];
         $savedb->update();
         return back()->withInput();

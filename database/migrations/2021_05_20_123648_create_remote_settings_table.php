@@ -18,8 +18,7 @@ class CreateRemoteSettingsTable extends Migration
             $table->string('name', 150);
             $table->string('remoteip', 150);
             $table->string('remotelogin', 150);
-            $table->string('remotepass', 150);
-            $table->text('remotepath');
+            $table->string('remotepass', 150);            
             $table->string('remoteport', 10);
             $table->string('remotetype', 15);
             $table->timestamps();

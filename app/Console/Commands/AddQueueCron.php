@@ -61,21 +61,21 @@ class AddQueueCron extends Command
             else if ($item->period == 2 && date('d') == "01") $cont = true;
             if ($cont == true){
                 $remote = RemoteSettings::Find($item->remoteId);
-                $hotsing = Hosting::Find($item->remoteId);
+                $hosting = Hosting::Find($item->remoteId);
                 $savedb = new Queue;
                 $savedb->locked = 0;
                 $savedb->hid = $item->hid;
-                $savedb->hostingname = $hotsing->name;
+                $savedb->hostingname = $hosting->name;
                 $savedb->schid = $item->id;
                 $savedb->backupItems = $item->backupItems;
                 $savedb->remoteip = $remote->remoteip;
                 $savedb->remotelogin = $remote->remotelogin;
-                $savedb->remotepass = $remote->remotepass;
-                $savedb->remotepath = $remote->remotepath;
+                $savedb->remotepass = $remote->remotepass;                
                 $savedb->remoteport = $remote->remoteport;
                 $savedb->remotetype = $remote->remotetype;
-                $savedb->path = $hotsing->path;
-                $savedb->dbpath = $hotsing->dbpath;
+                $savedb->path = $hosting->path;
+                $savedb->dbpath = $hosting->dbpath;
+                $savedb->remotepath = $hosting->remotepath;
                 $savedb->save();
                 $this->info($item);
             }               

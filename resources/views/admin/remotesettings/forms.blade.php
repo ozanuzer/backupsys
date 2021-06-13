@@ -61,13 +61,7 @@
                             <div class="col-md-10">
                                 <input name="remoteport" type="text" class="form-control" placeholder="Port..." value="{{ @$savedb->remoteport }}">
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 col-form-label">Remote Save Path</label>
-                            <div class="col-md-10">
-                                <input name="remotepath" type="text" class="form-control" placeholder="Remote files path..." value="{{ @$savedb->remotepath }}">
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Remote Type</label>
                             <div class="col-md-10">

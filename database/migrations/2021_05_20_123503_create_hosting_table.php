@@ -18,6 +18,7 @@ class CreateHostingTable extends Migration
             $table->string('name',150);
             $table->text('path');
             $table->text('dbpath');
+            $table->text('remotepath');
             $table->tinyInteger('status');
             $table->timestamps();
         });

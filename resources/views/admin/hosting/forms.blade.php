@@ -50,6 +50,12 @@
                                 <input name="dbpath" type="text" class="form-control" placeholder="Hosting database path..." value="{{ @$hosting->dbpath }}">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Remote Save Path</label>
+                            <div class="col-md-10">
+                                <input name="remotepath" type="text" class="form-control" placeholder="Remote files path..." value="{{ @$hosting->remotepath }}">
+                            </div>
+                        </div>
                         
                         <div class="form-group text-right mb-0">
                             <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">

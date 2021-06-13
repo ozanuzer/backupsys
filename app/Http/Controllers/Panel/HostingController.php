@@ -90,6 +90,7 @@ class HostingController extends Controller
         $hosting->name = $req['name'];
         $hosting->path = $req['path'];
         $hosting->dbpath = $req['dbpath'];
+        $hosting->remotepath = $req['remotepath'];
         $hosting->status = 1;
         $hosting->save();
         $new = Hosting::Find($hosting->id);
@@ -110,6 +111,7 @@ class HostingController extends Controller
         $hosting->name = $req['name'];
         $hosting->path = $req['path'];
         $hosting->dbpath = $req['dbpath'];
+        $hosting->remotepath = $req['remotepath'];
         $hosting->update();
         return back()->withInput();
     }
