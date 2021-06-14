@@ -46,6 +46,7 @@ class AddQueueCron extends Command
      */
     public function handle()
     {
+        DB::table('queue')->truncate();
         $this->info('Queue starting...');
         $this->info(date('d-m-Y h:i:s'));
         $deactiveHostings = Hosting::where('status', 0)->get();
