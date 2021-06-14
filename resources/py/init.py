@@ -39,8 +39,12 @@ if queue[11] == 'ftp':
     myFTP = ftplib.FTP()
     myFTP.connect(queue[6], int(queue[10]))
     myFTP.login(queue[7], queue[8])
-    myFTP.mkd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
-    myFTP.cwd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
+    try:
+        myFTP.mkd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
+        myFTP.cwd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
+    except:
+        e = sys.exc_info()[0]
+        write_to_page( "<p>Error: %s</p>" % e )
     #myFTP = ftplib.FTP(queue[6], queue[7], queue[8])
     myPath = r'/tmp/backupsys/'+str(queue[0])
     def uploadThis(path):

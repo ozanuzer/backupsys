@@ -61,7 +61,7 @@ class AddQueueCron extends Command
             else if ($item->period == 2 && date('d') == "01") $cont = true;
             if ($cont == true){
                 $remote = RemoteSettings::Find($item->remoteId);
-                $hosting = Hosting::Find($item->remoteId);
+                $hosting = Hosting::Find($item->hid);
                 $savedb = new Queue;
                 $savedb->locked = 0;
                 $savedb->hid = $item->hid;
