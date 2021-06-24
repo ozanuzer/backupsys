@@ -77,6 +77,7 @@ class AddQueueCron extends Command
                 $savedb->path = $hosting->path;
                 $savedb->dbpath = $hosting->dbpath;
                 $savedb->remotepath = $hosting->remotepath;
+                $savedb->period = $item->period;
                 $savedb->save();
                 $this->info($item);
             }               

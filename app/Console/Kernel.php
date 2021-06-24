@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\AddQueueCron::class,
+        Commands\OldBackupsDeleteCron::class,
     ];
 
     /**
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('addqueue:cron')->dailyAt('05:00');
+        $schedule->command('oldbackupdelete:cron')->dailyAt('03:00');
     }
 
     /**

@@ -22,6 +22,13 @@ cursor.execute(query, bind)
 db.commit()
 now = datetime.now() # current date and time
 
+periodStr = ''
+if queue[14] == 0:
+    periodStr = 'daily'
+elif queue[14] == 1:
+    periodStr = 'weekly'
+if queue[14] == 2:
+    periodStr = 'monthly'
 if queue[5] == 1 or queue[5] == 2:
     os.system('rm -Rf '+queue[13]+'/*')
     query = "SELECT * FROM database_users WHERE hid = %s"
@@ -40,8 +47,8 @@ if queue[11] == 'ftp':
     myFTP.connect(queue[6], int(queue[10]))
     myFTP.login(queue[7], queue[8])
     try:
-        myFTP.mkd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
-        myFTP.cwd(queue[9]+'/'+now.strftime("%m-%d-%Y"))
+        myFTP.mkd(queue[9]+'/'+now.strftime("%m-%d-%Y")+'-'+periodStr)
+        myFTP.cwd(queue[9]+'/'+now.strftime("%m-%d-%Y")+'-'+periodStr)
     except:
         e = sys.exc_info()[0]
         write_to_page( "<p>Error: %s</p>" % e )
