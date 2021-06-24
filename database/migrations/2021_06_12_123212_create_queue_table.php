@@ -28,6 +28,7 @@ class CreateQueueTable extends Migration
             $table->string('remotetype', 15);
             $table->text('path');
             $table->text('dbpath');
+            $table->tinyInteger('period');
             $table->timestamps();
         });
     }

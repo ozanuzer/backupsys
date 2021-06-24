@@ -7,11 +7,6 @@
 @section('extrascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
     function saveDatabase(){
         //console.log(document.getElementById('testmode').checked);
         $.ajax({

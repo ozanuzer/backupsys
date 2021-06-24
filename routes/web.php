@@ -25,6 +25,7 @@ Route::group(['middleware' => 'admin'], function()
 {
     Route::prefix('panel')->group(function () {
         Route::get('/', 'Panel\DashboardController@index')->name('dashboard');
+        Route::post('/changetheme', 'Panel\DashboardController@changetheme')->name('dashboard.changetheme');
 
         //HOSTING
         Route::get('/hosting', 'Panel\HostingController@index')->name('panel.hosting');
@@ -137,5 +138,8 @@ Route::group(['middleware' => 'admin'], function()
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
+});
+Route::get('/home', function () {
+    return redirect()->route('dashboard');
 });

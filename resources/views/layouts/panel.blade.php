@@ -9,7 +9,7 @@
         <meta content="OzanUzer" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
+        <link rel="shortcut icon" href="/favicon.png">
         <!-- third party css -->
         @yield('extrastyles')
         <!-- App css -->
@@ -171,7 +171,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    2021 &copy; <a href="https://fikirkasabasi.com/" target='_blank'>FikirKasabası</a>
+                                    2021 &copy; <a href="#" target='_blank'>BackupSys</a>
                                 </div>
                             </div>
                         </div>
@@ -234,6 +234,11 @@
         <script src="/admin/assets/js/app.min.js"></script>
         <script>
         $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
                 const newColorScheme = e.matches ? "dark" : "light";
                 if (newColorScheme === "dark"){

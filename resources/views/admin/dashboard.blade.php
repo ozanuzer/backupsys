@@ -35,15 +35,15 @@
                                         <div class="row">
                                             <div class="col-xl-6 col-sm-6 widget-inline-box">
                                                 <div class="text-center p-3">
-                                                    <h2 class="mt-2"><i class="text-primary mdi mdi-account-multiple-outline mr-2"></i> <b></b></h2>
-                                                    <p class="text-muted mb-0">Model</p>
+                                                    <h2 class="mt-2"><i class="text-primary mdi mdi-server mr-2"></i> <b></b></h2>
+                                                    <p class="text-muted mb-0">{{ $hosting }} Hosting</p>
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6 col-sm-6 widget-inline-box">
                                                 <div class="text-center p-3">
-                                                    <h2 class="mt-2"><i class="text-primary mdi mdi-newspaper-variant-outline mr-2"></i> <b></b></h2>
-                                                    <p class="text-muted mb-0">Bülten</p>
+                                                    <h2 class="mt-2"><i class="text-primary mdi mdi-timeline-plus mr-2"></i> <b></b></h2>
+                                                    <p class="text-muted mb-0">{{ $schedule }} Schedule</p>
                                                 </div>
                                             </div>
 
