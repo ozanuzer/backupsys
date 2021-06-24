@@ -200,25 +200,6 @@ function ($) {
 
                 $("#dark-mode-switch").prop('checked', false);
                 $("#rtl-mode-switch").prop('checked', false);
-                $.ajax({
-                    url: "/panel/changetheme",
-                    type: "POST",
-                    data:  { theme: 'light' },
-                    success: function (data, textStatus, jqXHR) {
-                        if(data.success){
-                        return true;
-                        }else{
-                            Swal.fire(
-                            'Error!',
-                            'System Error!',
-                            'error'
-                            ).then(function (){
-                                //location.reload();
-                            });
-                        }
-                    },error: function(jqXHR, textStatus, errorThrown) {
-                    }
-                });
             }
         });
 
@@ -229,26 +210,6 @@ function ($) {
 
                 $("#light-mode-switch").prop('checked', false);
                 $("#rtl-mode-switch").prop('checked', false);
-
-                $.ajax({
-                    url: "/panel/changetheme",
-                    type: "POST",
-                    data:  { theme: 'dark' },
-                    success: function (data, textStatus, jqXHR) {
-                        if(data.success){
-                        return true;
-                        }else{
-                            Swal.fire(
-                            'Error!',
-                            'System Error!',
-                            'error'
-                            ).then(function (){
-                                //location.reload();
-                            });
-                        }
-                    },error: function(jqXHR, textStatus, errorThrown) {
-                    }
-                });
             }
         });
 
@@ -259,25 +220,6 @@ function ($) {
 
                 $("#light-mode-switch").prop('checked', false);
                 $("#dark-mode-switch").prop('checked', false);
-                $.ajax({
-                    url: "/panel/changetheme",
-                    type: "POST",
-                    data:  { theme: 'system' },
-                    success: function (data, textStatus, jqXHR) {
-                        if(data.success){
-                        return true;
-                        }else{
-                            Swal.fire(
-                            'Error!',
-                            'System Error!',
-                            'error'
-                            ).then(function (){
-                                //location.reload();
-                            });
-                        }
-                    },error: function(jqXHR, textStatus, errorThrown) {
-                    }
-                });
             }
         });
     },
