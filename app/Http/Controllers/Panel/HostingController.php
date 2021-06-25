@@ -118,13 +118,13 @@ class HostingController extends Controller
 
     public function delete($id){
         $hosting = Hosting::Find($id);
-        $hosting->delete();
+        if ($hosting != null) $hosting->delete();
         $sch = Schedule::where('hid', $id)->first();
-        $sch->delete();
+        if ($sch != null) $sch->delete();
         $dbu = DatabaseUsers::where('hid', $id)->first();
-        $dbu->delete();
+        if ($dbu != null) $dbu->delete();
         $log = Log::where('hid', $id)->first();
-        $log->delete();
+        if ($log != null) $log->delete();
         return back()->withInput();
         //return redirect()->route('models.poloraid', $id);
     }

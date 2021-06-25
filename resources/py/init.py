@@ -65,7 +65,7 @@ if queue[11] == 'ftp':
         for f in files:
             if os.path.isfile(f):
                 fh = open(f, 'rb')
-                myFTP.storbinary('STOR %s' % queue[9]+'/'+now.strftime("%m-%d-%Y")+'/'+f, fh)
+                myFTP.storbinary('STOR %s' % queue[9]+'/'+now.strftime("%m-%d-%Y")+'-'+periodStr+'/'+f, fh)
                 fh.close()
             elif os.path.isdir(f):
                 myFTP.mkd(f)
