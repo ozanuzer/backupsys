@@ -11,8 +11,19 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="/favicon.png">
         <!-- third party css -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         @yield('extrastyles')
         <!-- App css -->
+        
+        @if ( Auth::user()->paneltheme == "light" )
+            <link href="/admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>
+            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+            <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+        @elseif ( Auth::user()->paneltheme == "dark" )
+            <link href="/admin/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>
+            <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+            <link href="/admin/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />
+        @else
         <script>
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 document.write('<link href="/admin/assets/css/bootstrap-dark.min.css" rel="stylesheet" type="text/css" id="bootstrap-stylesheet"/>');
@@ -24,6 +35,9 @@
                 document.write('<link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-stylesheet" />');
             }
         </script>
+        @endif
+            
+        
         <style>
             .new_button{
                 float:right; margin-top:-10px; color:#fff !important;
@@ -194,7 +208,7 @@
                 <a href="javascript:void(0);" class="right-bar-toggle float-right">
                     <i class="mdi mdi-close"></i>
                 </a>
-                <h5 class="font-16 m-0 text-white">Tema</h5>
+                <h5 class="font-16 m-0 text-white">Theme</h5>
             </div>
             <div class="slimscroll-menu">
         
@@ -203,17 +217,38 @@
                         <img src="/admin/assets/images/layouts/light.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light</label>
+                        @if ( Auth::user()->paneltheme == "light" )
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-light-mode-switch" checked />
+                        @else
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-light-mode-switch" />
+                        @endif                        
+                        <label class="custom-control-label" for="fk-light-mode-switch">Light</label>
                     </div>
             
                     <div class="mb-2">
                         <img src="/admin/assets/images/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-3">
+                        @if ( Auth::user()->paneltheme == "dark" )
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-dark-mode-switch" checked />
+                        @else
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-dark-mode-switch" />
+                        @endif
                         <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="/admin/assets/css/bootstrap-dark.min.css" 
-                            data-appStyle="/admin/assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark</label>
+                            data-appStyle="/admin/assets/css/app-dark.min.css" style="display:none;" />
+                        <label class="custom-control-label" for="fk-dark-mode-switch">Dark</label>
+                    </div>
+
+                    <div class="mb-2">
+                        <img src="/admin/assets/images/layouts/system.png" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        @if ( Auth::user()->paneltheme == "system" )
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-system-mode-switch" checked />
+                        @else
+                        <input type="checkbox" class="custom-control-input theme-choice" id="fk-system-mode-switch" />
+                        @endif
+                        <label class="custom-control-label" for="fk-system-mode-switch">System</label>
                     </div>
                 </div>
             </div> <!-- end slimscroll-menu-->
@@ -248,7 +283,114 @@
                     $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap.min.css");
                     $('#app-stylesheet').attr('href', "/admin/assets/css/app.min.css");
                 }                
-            });            
+            });
+            $("#fk-light-mode-switch").on('change', function() {
+                if (this.checked) {
+                    $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap.min.css");
+                    $('#app-stylesheet').attr('href', "/admin/assets/css/app.min.css");
+
+                    $("#fk-dark-mode-switch").prop('checked', false);
+                    $("#fk-system-mode-switch").prop('checked', false);
+                    $.ajax({
+                        url: "{{route('dashboard.changetheme')}}",
+                        type: "POST",
+                        data:  { theme: 'light' },
+                        success: function (data, textStatus, jqXHR) {
+                            if(data.success){
+                            Swal.fire(
+                                'Success!',
+                                'Theme Saved',
+                                'success'
+                                ).then(function (){
+                                    //location.reload();
+                                });
+                            }else{
+                                Swal.fire(
+                                'Error!',
+                                'System Error!',
+                                'error'
+                                ).then(function (){
+                                    location.reload();
+                                });
+                            }
+                        },error: function(jqXHR, textStatus, errorThrown) {
+                        }
+                    });
+                }
+            });
+            $("#fk-dark-mode-switch").on('change', function() {
+                if (this.checked) {
+                    $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap-dark.min.css");
+                    $('#app-stylesheet').attr('href', "/admin/assets/css/app-dark.min.css");
+
+                    $("#fk-light-mode-switch").prop('checked', false);
+                    $("#fk-system-mode-switch").prop('checked', false);
+                    $.ajax({
+                        url: "{{route('dashboard.changetheme')}}",
+                        type: "POST",
+                        data:  { theme: 'dark' },
+                        success: function (data, textStatus, jqXHR) {
+                            if(data.success){
+                            Swal.fire(
+                                'Success!',
+                                'Theme Saved',
+                                'success'
+                                ).then(function (){
+                                    //location.reload();
+                                });
+                            }else{
+                                Swal.fire(
+                                'Error!',
+                                'System Error!',
+                                'error'
+                                ).then(function (){
+                                    location.reload();
+                                });
+                            }
+                        },error: function(jqXHR, textStatus, errorThrown) {
+                        }
+                    });
+                }
+            });
+            $("#fk-system-mode-switch").on('change', function() {
+                if (this.checked) {
+                    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap-dark.min.css");
+                        $('#app-stylesheet').attr('href', "/admin/assets/css/app-dark.min.css");
+                    } else {
+                        $('#bootstrap-stylesheet').attr('href', "/admin/assets/css/bootstrap.min.css");
+                        $('#app-stylesheet').attr('href', "/admin/assets/css/app.min.css");
+                    }
+
+                    $("#fk-light-mode-switch").prop('checked', false);
+                    $("#fk-dark-mode-switch").prop('checked', false);
+                    $.ajax({
+                        url: "{{route('dashboard.changetheme')}}",
+                        type: "POST",
+                        data:  { theme: 'system' },
+                        success: function (data, textStatus, jqXHR) {
+                            if(data.success){
+                            Swal.fire(
+                                'Success!',
+                                'Theme Saved',
+                                'success'
+                                ).then(function (){
+                                    //location.reload();
+                                });
+                            }else{
+                                Swal.fire(
+                                'Error!',
+                                'System Error!',
+                                'error'
+                                ).then(function (){
+                                    location.reload();
+                                });
+                            }
+                        },error: function(jqXHR, textStatus, errorThrown) {
+                        }
+                    });
+                }
+            });   
         });
         </script>
         

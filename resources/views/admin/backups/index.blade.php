@@ -1,8 +1,5 @@
 @extends('layouts.panel',['pageName' => 'Backups'])
 
-@section('extrastyles')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 
 @section('extrascripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

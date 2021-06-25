@@ -28,6 +28,7 @@ class UserFactory extends Factory
             'email' => env("ADMIN_EMAIL", "admin@admin.com"), //$this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make(env("ADMIN_PASSWORD", "RsH8tUeHm8wYdjSY")), //'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'paneltheme' => 'system',
             'remember_token' => Str::random(10),
         ];
     }

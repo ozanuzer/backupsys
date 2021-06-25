@@ -14,6 +14,11 @@ cursor.execute(query)
 queue = cursor.fetchone()
 if queue is None:
     print('queue empty')
+    query = "SELECT COUNT(*) FROM queue LIMIT 1"
+    cursor.execute(query)
+    queuecount = cursor.fetchone()
+    if queuecount[0] == 0:
+        os.system('rm -Rf /tmp/backupsys/*')
     exit()
 
 query = "UPDATE queue SET locked = 1 WHERE id = %s"
