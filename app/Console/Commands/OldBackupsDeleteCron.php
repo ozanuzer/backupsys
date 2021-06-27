@@ -83,8 +83,8 @@ class OldBackupsDeleteCron extends Command
                 if (strpos($dir, 'monthly') !== false) { $monthly[] = $dir; }
             }
             $daily = array_reverse($daily); $weekly = array_reverse($weekly); $monthly = array_reverse($monthly);
-            if (count($daily) > 4) for($i = count($daily)-3; $i < count($daily); $i++){ $this->recursiveDelete($daily[$i]); }
-            if (count($weekly) > 4) for($i = count($weekly)-3; $i < count($weekly); $i++){ $this->recursiveDelete($weekly[$i]); }
+            if (count($daily) > 4) for($i = count($daily)-2; $i < count($daily); $i++){ $this->recursiveDelete($daily[$i]); }
+            if (count($weekly) > 4) for($i = count($weekly)-2; $i < count($weekly); $i++){ $this->recursiveDelete($weekly[$i]); }
             if (count($monthly) > 3) for($i = count($monthly)-2; $i < count($monthly); $i++){ $this->recursiveDelete($monthly[$i]); }
             var_dump($dirlist);
             //return 0;
