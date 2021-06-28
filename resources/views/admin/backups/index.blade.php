@@ -219,8 +219,8 @@
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <!--<th>Username</th>
-                                                        <th>Password</th>-->
+                                                        <th>Username</th>
+                                                        <th>Password</th>
                                                         <th>DB Name</th>
                                                         <th>Process</th>
                                                     </tr>
