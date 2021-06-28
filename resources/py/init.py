@@ -47,7 +47,10 @@ if queue[5] == 1 or queue[5] == 2:
     databases = cursor.fetchall()
     for database in databases:
         print(database)
-        os.system('mysqldump '+database[4]+' > '+queue[13]+'/'+database[4]+'-'+uuid.uuid4().hex[:6].upper()+'-'+now.strftime("%m-%d-%Y-%H-%M-%S")+'.sql')
+        if (database[2] == 'no' or database[3] == 'no'):
+            os.system('mysqldump '+database[4]+' > '+queue[13]+'/'+database[4]+'-'+uuid.uuid4().hex[:6].upper()+'-'+now.strftime("%m-%d-%Y-%H-%M-%S")+'.sql')
+        else:
+            os.system('mysqldump -u'+database[2]+' -p'+database[3]+' '+database[4]+' > '+queue[13]+'/'+database[4]+'-'+uuid.uuid4().hex[:6].upper()+'-'+now.strftime("%m-%d-%Y-%H-%M-%S")+'.sql')
 os.system('mkdir -p /tmp/backupsys/'+str(queue[0]))
 if queue[5] != 1:
     os.system('tar -czvf /tmp/backupsys/'+str(queue[0])+'/'+queue[3]+'-'+uuid.uuid4().hex[:6].upper()+'-'+now.strftime("%m-%d-%Y-%H-%M-%S")+'.tar.gz '+queue[12])

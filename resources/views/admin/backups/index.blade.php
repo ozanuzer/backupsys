@@ -239,12 +239,12 @@
                                             </table>
                                         </div>
                                         <div class="form-group row" style="margin-top:25px;">
-                                            <!--<div class="col-md-6">
-                                                <input id="dbusername" type="text" class="form-control" placeholder="Username..." value="">
+                                            <div class="col-md-6">
+                                                <input id="dbusername" type="text" class="form-control" placeholder="Username..." value="no">
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="dbpass" type="text" class="form-control" placeholder="Password..." value="">
-                                            </div>-->
+                                                <input id="dbpass" type="text" class="form-control" placeholder="Password..." value="no">
+                                            </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6">
