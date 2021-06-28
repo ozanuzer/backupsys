@@ -45,8 +45,8 @@ class BackupController extends Controller
         $req = $request->all();
         $savedb = new DatabaseUsers;
         $savedb->hid = $hid;
-        $savedb->username = $req['dbusername'];
-        $savedb->password = $req['dbpass'];
+        $savedb->username = empty($req['dbusername']) ? 'no':$req['dbusername'];
+        $savedb->password = empty($req['dbpass']) ? 'no':$req['dbpass'];
         $savedb->dbname = $req['dbname'];
         $savedb->save();
         $databases = DatabaseUsers::where('hid', $hid)->get();

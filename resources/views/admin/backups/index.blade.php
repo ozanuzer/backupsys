@@ -240,10 +240,10 @@
                                         </div>
                                         <div class="form-group row" style="margin-top:25px;">
                                             <div class="col-md-6">
-                                                <input id="dbusername" type="text" class="form-control" placeholder="Username..." value="no">
+                                                <input id="dbusername" type="text" class="form-control" placeholder="Username..." value="">
                                             </div>
                                             <div class="col-md-6">
-                                                <input id="dbpass" type="text" class="form-control" placeholder="Password..." value="no">
+                                                <input id="dbpass" type="text" class="form-control" placeholder="Password..." value="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
