@@ -1,12 +1,17 @@
 import mysql.connector as mysql
 import os, uuid, ftplib
+from os.path import join, dirname
 from datetime import datetime
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), '../../.env')
+config = load_dotenv(dotenv_path)
+#print(os.environ.get("DB_DATABASE"))
 print('Please wait while the program is loading...')
 db = mysql.connect(
     host = "localhost",
-    user = "backupsys",
-    passwd = "G5cst.mqXnpg3Gru",
-    database = "backupsys_db"
+    user = os.environ.get("DB_USERNAME"),
+    passwd = os.environ.get("DB_PASSWORD"),
+    database = os.environ.get("DB_DATABASE")
 )
 cursor = db.cursor()
 query = "SELECT * FROM queue WHERE locked = 0 LIMIT 1"
