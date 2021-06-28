@@ -23,8 +23,8 @@
                             $.each(data.databases, function(i, item) {
                                 thtml += '<tr>';
                                 thtml += '<th scope="row">'+data.databases[i].id+'</th>';
-                                /*thtml += '<td>'+data.databases[i].username+'</td>';
-                                thtml += '<td>'+data.databases[i].password+'</td>';*/
+                                thtml += '<td>'+data.databases[i].username+'</td>';
+                                thtml += '<td>'+data.databases[i].password+'</td>';
                                 thtml += '<td>'+data.databases[i].dbname+'</td>';
                                 thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase('+data.databases[i].id+');" >Delete</a></td>';
                                 thtml += '</tr>';
@@ -67,8 +67,8 @@
                                 $.each(data.databases, function(i, item) {
                                     thtml += '<tr>';
                                     thtml += '<th scope="row">'+data.databases[i].id+'</th>';
-                                    /*thtml += '<td>'+data.databases[i].username+'</td>';
-                                    thtml += '<td>'+data.databases[i].password+'</td>';*/
+                                    thtml += '<td>'+data.databases[i].username+'</td>';
+                                    thtml += '<td>'+data.databases[i].password+'</td>';
                                     thtml += '<td>'+data.databases[i].dbname+'</td>';
                                     thtml += '<td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase('+data.databases[i].id+');" >Delete</a></td>';
                                     thtml += '</tr>';
@@ -229,8 +229,8 @@
                                                 @foreach ($databases as $db)
                                                     <tr>
                                                         <th scope="row">{{ $db->id }}</th>
-                                                        <!--<td>{{ $db->username }}</td>
-                                                        <td>{{ $db->password }}</td>-->
+                                                        <td>{{ $db->username }}</td>
+                                                        <td>{{ $db->password }}</td>
                                                         <td>{{ $db->dbname }}</td>
                                                         <td><a href="#" type="button" class="btn btn-secondary dbtalbe_button" onclick="deleteDatabase({{ $db->id }});" >Delete</a></td>
                                                     </tr>
