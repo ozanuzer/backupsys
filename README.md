@@ -56,4 +56,4 @@ If you discover a security vulnerability within BackupSys, please send an e-mail
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The BackupSys copyright ©2021 Ozan Uzer. All rights reserved.
