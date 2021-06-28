@@ -41,11 +41,6 @@ pip install mysql-connector-python
 pip install python-dotenv
 ```
 
-
-### Premium Partners
-
-- **[Ozan Uzer](https://ozanuzer.com/)**
-
 ## Contributing
 
 Thank you for considering contributing to the BackupSys! [Contact Us](mailto:mail@ozanuzer.com).
