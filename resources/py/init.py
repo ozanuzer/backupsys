@@ -8,7 +8,7 @@ config = load_dotenv(dotenv_path)
 #print(os.environ.get("DB_DATABASE"))
 print('Please wait while the program is loading...')
 db = mysql.connect(
-    host = "localhost",
+    host = os.environ.get("DB_HOST"),
     user = os.environ.get("DB_USERNAME"),
     passwd = os.environ.get("DB_PASSWORD"),
     database = os.environ.get("DB_DATABASE")
