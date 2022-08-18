@@ -26,8 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('addqueue:cron')->dailyAt('05:00');
-        $schedule->command('oldbackupdelete:cron')->dailyAt('03:00');
+        //$schedule->command('addqueue:cron')->dailyAt('05:00');
+        //$schedule->command('oldbackupdelete:cron')->dailyAt('03:00');
+
+        $schedule->command('addqueueDistedavim:cron')->hourly();
     }
 
     /**
