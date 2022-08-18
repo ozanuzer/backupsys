@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AddQueueCron::class,
         Commands\OldBackupsDeleteCron::class,
+        Commands\AddqueueDistedavimCron::class,
     ];
 
     /**
