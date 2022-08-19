@@ -1,5 +1,5 @@
 import mysql.connector as mysql
-import os, uuid, ftplib
+import os, uuid, ftplib, sys
 from os.path import join, dirname
 from datetime import datetime
 from dotenv import load_dotenv
@@ -64,7 +64,7 @@ if queue[11] == 'ftp':
         myFTP.cwd(queue[9]+'/'+now.strftime("%m-%d-%Y")+'-'+periodStr)
     except:
         e = sys.exc_info()[0]
-        write_to_page( "<p>Error: %s</p>" % e )
+        print( "<p>Error: %s</p>" % e )
     #myFTP = ftplib.FTP(queue[6], queue[7], queue[8])
     myPath = r'/tmp/backupsys/'+str(queue[0])
     def uploadThis(path):
