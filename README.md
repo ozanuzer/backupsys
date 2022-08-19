@@ -41,6 +41,23 @@ pip install mysql-connector-python
 pip install python-dotenv
 ```
 
+## CRON EXAMPLE
+```
+* * * * * php /var/www/backupsys/public_html/artisan schedule:run 1>> /dev/null 2>&1
+* * * * * sleep 1; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 5; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 9; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 13; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 17; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 21; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 25; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 29; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 33; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 37; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 41; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+* * * * * sleep 45; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
+```
+
 ## Contributing
 
 Thank you for considering contributing to the BackupSys! [Contact Us](mailto:mail@ozanuzer.com).
