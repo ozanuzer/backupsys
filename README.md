@@ -41,7 +41,7 @@ pip install mysql-connector-python
 pip install python-dotenv
 ```
 
-## CRON EXAMPLE
+### Cron Example
 ```
 * * * * * php /var/www/backupsys/public_html/artisan schedule:run 1>> /dev/null 2>&1
 * * * * * sleep 1; python3 /var/www/backupsys/public_html/resources/py/init.py 1>> /dev/null 2>&1
