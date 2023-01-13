@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AddQueueCron::class,
         Commands\OldBackupsDeleteCron::class,
-        Commands\AddqueueDistedavimCron::class,
+        Commands\AddqueueDatabaseBasedCron::class,
     ];
 
     /**
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('addqueue:cron')->dailyAt('05:00');
         $schedule->command('oldbackupdelete:cron')->dailyAt('03:00');
 
-        //$schedule->command('addqueueDistedavim:cron')->hourly();
+        //$schedule->command('AddqueueDatabaseBased:cron')->hourly(); //Open is if you want to get hourly database backup
     }
 
     /**

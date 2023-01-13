@@ -11,7 +11,7 @@ use App\Models\RemoteSettings;
 use App\Models\Queue;
 use Illuminate\Support\Facades\DB;
 
-class AddqueueDistedavimCron extends Command
+class AddqueueDatabaseBasedCron extends Command
 {
     public $periods = array(0 => 'Daily', 1 => 'Weekly', 2 => 'Monthly');
     public $backupItems = array(0 => 'Files', 1 => 'Databases', 2 => 'Files And Databases');
@@ -20,7 +20,7 @@ class AddqueueDistedavimCron extends Command
      *
      * @var string
      */
-    protected $signature = 'addqueueDistedavim:cron';
+    protected $signature = 'AddqueueDatabaseBased:cron';
 
     /**
      * The console command description.
