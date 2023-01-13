@@ -62,3 +62,4 @@ npm-debug.log
 yarn-error.log
 index.php
 composer.lock
+.DS_Store
